@@ -11,7 +11,7 @@ function __autoload($class_name) {
 
 // UTILITY FUNCTIONS
 class Util{
-	function makeVar($var, $type=""){
+	public static function makeVar($var, $type=""){
 		global $_GET, $_POST;
 		$temp = false;
 		if(isset($_GET[$var])){ $temp = $_GET[$var]; }
@@ -46,7 +46,7 @@ class Util{
 		return $temp;
 	}
 	
-	function isAlpha( $str ){
+	public static function isAlpha( $str ){
 		$alpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		for( $i = 0; $i < strlen( $str ); $i++ ){
 			if( !strstr( $alpha, substr( $str, $i, 1 ) ) ){
@@ -56,7 +56,7 @@ class Util{
 		return true;
 	}
 	
-	function isAlphaNum( $str ){
+	public static function isAlphaNum( $str ){
 		$alphaNum = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		for( $i = 0; $i < strlen( $str ); $i++ ){
 			if( !strstr( $alphaNum, substr( $str, $i, 1 ) ) ){
@@ -66,7 +66,7 @@ class Util{
 		return true;
 	}
 		
-	function getRandStr($numChars=10){
+	public static function getRandStr($numChars=10){
 		$chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789abcdefghjklmnpqrstuvwxyz";
 		for($i = 0; $i < $numChars; $i++){
 			$char = substr($chars, rand(0,strlen($chars)), 1);
@@ -75,14 +75,14 @@ class Util{
 		return $randStr;
 	}
 	
-	function sendEmail($mailTo, $mailSubj, $mailBody){
+	public static function sendEmail($mailTo, $mailSubj, $mailBody){
 		$mailBody .= "\n---------------------------------------------------\n"
 							.  "This is an automatically generated email message. Please do not respond to it.";
 		$mailFromHeaders = "From: " . APP_EMAIL . "\r\nReply-To: " . APP_EMAIL . "\r\nReturn-Path: $appEmail";
 		mail($mailTo, $mailSubj, $mailBody, $mailFromHeaders);
 	}
 			
-	function linkEmails( $string ){
+	public static function linkEmails( $string ){
 		$pattern = '/(\S+@\S+\.\S+)/i';
 		$replacement = '<a href="mailto:$1">$1</a>';
 		return preg_replace( $pattern, $replacement, $string );
